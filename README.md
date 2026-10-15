@@ -42,3 +42,11 @@ Asignatura impartida por el **Departamento de Ingeniería Eléctrica, Electróni
 Este repositorio tiene finalidad exclusivamente docente.
 
 Si detectas algún error o tienes alguna sugerencia de mejora, puedes comunicarlo al profesorado de la asignatura.
+
+---
+
+## Explicación trabajo
+
+En este apartado se explicará todo lo referente a la modificación del código del ejecutable del juego del tenis, evitando explicaciones de como se han instalado paquetes en Ubuntu, clonación del repositorio personal, etc.
+
+1) He modificado el código de Esfera.cpp, en concreto el del método 'Mueve', dando así movimiento a la esfera, con las velocidades predeterminadas que venían por defecto. Se ha seguido el mismo procedimiento con el Raqueta.cpp
