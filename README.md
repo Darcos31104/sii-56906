@@ -49,4 +49,19 @@ Si detectas algún error o tienes alguna sugerencia de mejora, puedes comunicarl
 
 En este apartado se explicará todo lo referente a la modificación del código del ejecutable del juego del tenis, evitando explicaciones de como se han instalado paquetes en Ubuntu, clonación del repositorio personal, etc.
 
-1) He modificado el código de Esfera.cpp, en concreto el del método 'Mueve', dando así movimiento a la esfera, con las velocidades predeterminadas que venían por defecto. Se ha seguido el mismo procedimiento con el Raqueta.cpp
+- PRÁCTICA 1
+
+He modificado el código de Esfera.cpp, en concreto el del método 'Mueve', dando así movimiento a la esfera, con las velocidades predeterminadas que venían por defecto. Se ha seguido el mismo procedimiento con el Raqueta.cpp
+
+-PRÁCTICA 2
+
+En esta práctica se ha implementado la comunicación entre dos procesos mediante una tubería FIFO en Linux.
+
+Se ha añadido un nuevo programa logger, encargado de crear y abrir la FIFO en modo lectura y mostrar por terminal los mensajes recibidos.
+
+El programa tenis abre la FIFO en modo escritura y envía un mensaje cada vez que uno de los jugadores consigue un punto, indicando el jugador que ha marcado y su puntuación total.
+
+La comunicación se realiza mediante las llamadas al sistema mkfifo(), open(), read(), write(), close() y unlink().
+
+Además, el juego finaliza cuando uno de los jugadores alcanza 3 puntos, provocando también la finalización del proceso logger.
+
