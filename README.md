@@ -65,3 +65,25 @@ La comunicación se realiza mediante las llamadas al sistema mkfifo(), open(), r
 
 Además, el juego finaliza cuando uno de los jugadores alcanza 3 puntos, provocando también la finalización del proceso logger.
 
+-PRÁCTICA 3
+
+En esta práctica se ha añadido un tercer proceso, `bot`, que controla automáticamente la raqueta del jugador 1.
+
+La comunicación entre `tenis` y `bot` se realiza mediante memoria compartida utilizando un archivo proyectado con `mmap()`.
+
+Para ello se ha creado la estructura `DatosMemCompartida`, que contiene la información necesaria para compartir el estado de la esfera, la posición de la raqueta 1 y la acción que debe realizar el bot.
+
+El programa `tenis` actualiza continuamente en memoria compartida la posición de la esfera y de la raqueta, mientras que `bot` lee estos datos y escribe una acción:
+
+- `1`: mover la raqueta hacia arriba.
+- `0`: no realizar movimiento.
+- `-1`: mover la raqueta hacia abajo.
+
+También se ha modificado `CMakeLists.txt` para generar el nuevo ejecutable `bot`.
+
+La aplicación final utiliza simultáneamente tres procesos:
+
+- `logger`, para recibir los eventos de puntuación mediante FIFO.
+- `tenis`, como proceso principal del juego.
+- `bot`, para controlar automáticamente una de las raquetas mediante memoria compartida.
+
