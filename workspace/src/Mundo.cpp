@@ -11,6 +11,8 @@
 #include <math.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -117,6 +119,15 @@ void CMundo::OnDraw()
 
 void CMundo::OnTimer(int value)
 {	
+
+        datos->esfera = esfera;
+        datos->raqueta1 = jugador1;
+        
+        if(datos->accion == 1)
+           OnKeyboardDown('w',0,0);
+        else if(datos->accion == -1)
+           OnKeyboardDown('s',0,0);
+
 	jugador1.Mueve(0.025f);
 	jugador2.Mueve(0.025f);
 	esfera.Mueve(0.025f);
@@ -192,6 +203,38 @@ void CMundo::OnKeyboardDown(unsigned char key, int x, int y)
 
 void CMundo::Init()
 {
+
+int fdMem;
+char* direccion;
+
+fdMem = open("datos.dat", O_CREAT|O_RDWR, 0666);
+
+if (fdMem==-1)
+{
+perror("Error al abrir el archivo de memoria compartida");
+exit(1);
+}
+
+if (ftruncate(fdMem, sizeof(DatosMemCompartida)) == -1)
+{
+perror("Error en ftruncate");
+close(fdMem);
+exit(1);
+}
+
+direccion = (char*)mmap(NULL, sizeof(DatosMemCompartida), PROT_READ | PROT_WRITE, MAP_SHARED, fdMem,0);
+
+if(direccion == MAP_FAILED)
+{
+perror("Error en mmap");
+close(fdMem);
+exit(1);
+}
+
+close (fdMem);
+
+datos = (DatosMemCompartida*)direccion;
+datos ->accion = 0;
 
 fd = open("fifo", O_WRONLY);
 

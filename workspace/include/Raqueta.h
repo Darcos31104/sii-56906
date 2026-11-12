@@ -1,6 +1,8 @@
 // Raqueta.h: interface for the Raqueta class.
 //
 //////////////////////////////////////////////////////////////////////
+#pragma once
+
 
 #include "Plano.h"
 #include "Vector2D.h"
